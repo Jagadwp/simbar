@@ -48,6 +48,15 @@
               Data material berhasil dihapus.
             </div>";
     }
+    // jika alert = 4
+    // tampilkan pesan Gagal "Data material tidak berhasil disimpan"
+    elseif ($_GET['alert'] == 4) {
+      echo "<div class='alert alert-danger alert-dismissable'>
+              <button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button>
+              <h4>  <i class='icon fa fa-check-circle'></i> Gagal!</h4>
+              Data material telah dimasukkan sebelumnya. 
+            </div>";
+    }
     ?>
 
       <div class="box box-primary">

@@ -29,16 +29,28 @@ else {
             $gambar      = mysqli_real_escape_string($mysqli, trim($_POST['gambar']));
             $created_user = $_SESSION['id_user'];
 
-            // perintah query untuk menyimpan data ke tabel material
-    $query = mysqli_query($mysqli, "INSERT INTO is_helm(kode_mat,nama_mat,jenis,kaliber,no_lot,negara,tidak_siap,siap,stock_akhir,satuan,deret,gudang,gambar,created_user,updated_user) 
-    VALUES('$kode_mat','$nama_mat','$jenis','$kaliber','$no_lot','$negara','$tidak_siap','$siap','$stock_akhir','$satuan','$deret','$gudang','$gambar','$created_user','$created_user')")
-                                            or die('Ada kesalahan pada query insert : '.mysqli_error($mysqli));    
+            // Periksa apakah ada record duplikat di database
+            $cek_query = mysqli_query($mysqli, "SELECT * FROM is_helm 
+                WHERE kode_mat = '$kode_mat' 
+                AND no_lot = '$no_lot' 
+                AND deret = '$deret' 
+                AND gudang = '$gudang'");
 
-            // cek query
-            if ($query) {
-                // jika berhasil tampilkan pesan berhasil simpan data
-                header("location: ../../main.php?module=helm&alert=1");
-            }   
+            if (mysqli_num_rows($cek_query) > 0) {
+                // Jika ditemukan data duplikat, berikan pesan error dan hentikan proses
+                header("location: ../../main.php?module=helm&alert=4");
+            } else {
+                // perintah query untuk menyimpan data ke tabel material
+                $query = mysqli_query($mysqli, "INSERT INTO is_helm(kode_mat,nama_mat,jenis,kaliber,no_lot,negara,tidak_siap,siap,stock_akhir,satuan,deret,gudang,gambar,created_user,updated_user) 
+                VALUES('$kode_mat','$nama_mat','$jenis','$kaliber','$no_lot','$negara','$tidak_siap','$siap','$stock_akhir','$satuan','$deret','$gudang','$gambar','$created_user','$created_user')")
+                                                or die('Ada kesalahan pada query insert : '.mysqli_error($mysqli));    
+    
+                // cek query
+                if ($query) {
+                    // jika berhasil tampilkan pesan berhasil simpan data
+                    header("location: ../../main.php?module=helm&alert=1");
+                }   
+            }
         }   
     }
     
@@ -62,28 +74,40 @@ else {
                 $gambar       = mysqli_real_escape_string($mysqli, trim($_POST['gambar']));
                 $updated_user = $_SESSION['id_user'];
 
-                // perintah query untuk mengubah data pada tabel material
-                $query = mysqli_query($mysqli, "UPDATE is_helm SET  nama_mat        = '$nama_mat',
-                                                                    jenis           = '$jenis',
-                                                                    kaliber         = '$kaliber',
-                                                                    no_lot          = '$no_lot',
-                                                                    negara          = '$negara',
-                                                                    siap            = '$siap',
-                                                                    tidak_siap      = '$tidak_siap',
-                                                                    stock_akhir     = '$stock_akhir',
-                                                                    satuan          = '$satuan',
-                                                                    deret           = '$deret',
-                                                                    gudang          = '$gudang',
-                                                                    gambar          = '$gambar',
-                                                                    updated_user    = '$updated_user'
-                                                              WHERE id_helm        = '$id_helm'")
-                                                or die('Ada kesalahan pada query update : '.mysqli_error($mysqli));
+                // Periksa apakah ada record duplikat di database
+                $cek_query = mysqli_query($mysqli, "SELECT * FROM is_helm 
+                    WHERE kode_mat = '$kode_mat' 
+                    AND no_lot = '$no_lot' 
+                    AND deret = '$deret' 
+                    AND gudang = '$gudang'");
 
-                // cek query
-                if ($query) {
-                    // jika berhasil tampilkan pesan berhasil update data
-                    header("location: ../../main.php?module=helm&alert=2");
-                }         
+                if (mysqli_num_rows($cek_query) > 0) {
+                    // Jika ditemukan data duplikat, berikan pesan error dan hentikan proses
+                    header("location: ../../main.php?module=helm&alert=4");
+                } else {
+                    // perintah query untuk mengubah data pada tabel material
+                    $query = mysqli_query($mysqli, "UPDATE is_helm SET  nama_mat        = '$nama_mat',
+                                                                        jenis           = '$jenis',
+                                                                        kaliber         = '$kaliber',
+                                                                        no_lot          = '$no_lot',
+                                                                        negara          = '$negara',
+                                                                        siap            = '$siap',
+                                                                        tidak_siap      = '$tidak_siap',
+                                                                        stock_akhir     = '$stock_akhir',
+                                                                        satuan          = '$satuan',
+                                                                        deret           = '$deret',
+                                                                        gudang          = '$gudang',
+                                                                        gambar          = '$gambar',
+                                                                        updated_user    = '$updated_user'
+                                                                  WHERE id_helm         = '$id_helm'")
+                                                    or die('Ada kesalahan pada query update : '.mysqli_error($mysqli));
+    
+                    // cek query
+                    if ($query) {
+                        // jika berhasil tampilkan pesan berhasil update data
+                        header("location: ../../main.php?module=helm&alert=2");
+                    }         
+                }
             }
         }
     }
