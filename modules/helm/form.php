@@ -612,7 +612,7 @@ if ($_GET['form']=='add') { ?>
                   <br/>
                 
                 <?php  
-                if ($data['gambar']=="") { ?>
+                if (!isset($data['gambar'])) { ?>
                   <img style="border:1px solid #eaeaea;border-radius:5px;" src="images/gambar/contoh-amocil.png" width="60">
                 <?php
                 }
@@ -646,7 +646,7 @@ if ($_GET['form']=='add') { ?>
 elseif ($_GET['form']=='edit') { 
   if (isset($_GET['id'])) {
       // fungsi query untuk menampilkan data dari tabel obat
-      $query = mysqli_query($mysqli, "SELECT kode_mat,nama_mat,jenis,kaliber,negara,tidak_siap,siap,stock_akhir,satuan,gudang,gambar FROM is_helm WHERE kode_mat='$_GET[id]'") 
+      $query = mysqli_query($mysqli, "SELECT id_helm,kode_mat,nama_mat,jenis,kaliber,negara,tidak_siap,siap,stock_akhir,satuan,gudang,gambar FROM is_helm WHERE id_helm='$_GET[id]'") 
                                       or die('Ada kesalahan pada query tampil Data obat : '.mysqli_error($mysqli));
       $data  = mysqli_fetch_assoc($query);
     }
@@ -672,7 +672,7 @@ elseif ($_GET['form']=='edit') {
           <!-- form start -->
           <form role="form" class="form-horizontal" action="modules/helm/proses.php?act=update" method="POST">
             <div class="box-body">
-              
+            <input type="hidden" id="id_helm" name="id_helm" value="<?php echo $data['id_helm']; ?>">
               <div class="form-group">
                 <label class="col-sm-2 control-label">Kode Material</label>
                 <div class="col-sm-5">

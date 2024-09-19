@@ -20,21 +20,21 @@ else {
             $satkai            = mysqli_real_escape_string($mysqli, trim($_POST['satkai']));
             $exp               = explode('-',$tanggal);
             $tanggal_keluar    = $exp[2]."-".$exp[1]."-".$exp[0];
-            $kode_mat          = mysqli_real_escape_string($mysqli, trim($_POST['kode_mat']));
+            $id_helm          = mysqli_real_escape_string($mysqli, trim($_POST['id_helm']));
             $jumlah_keluar     = mysqli_real_escape_string($mysqli, trim($_POST['jumlah_keluar']));
             $total_stock       = mysqli_real_escape_string($mysqli, trim($_POST['total_stock']));
             $created_user      = $_SESSION['id_user'];
 
             // perintah query untuk menyimpan data ke tabel helm masuk
-            $query = mysqli_query($mysqli, "INSERT INTO is_obat_keluar(kode_transaksi,no_sput,tanggal_keluar,satkai,kode_mat,jumlah_keluar,created_user) 
-                                            VALUES('$kode_transaksi','$no_sput','$tanggal_keluar','$satkai','$kode_mat','$jumlah_keluar','$created_user')")
+            $query = mysqli_query($mysqli, "INSERT INTO is_obat_keluar(kode_transaksi,no_sput,tanggal_keluar,satkai,id_helm,jumlah_keluar,created_user) 
+                                            VALUES('$kode_transaksi','$no_sput','$tanggal_keluar','$satkai','$id_helm','$jumlah_keluar','$created_user')")
                                             or die('Ada kesalahan pada query insert : '.mysqli_error($mysqli));    
 
             // cek query
             if ($query) {
                 // perintah query untuk mengubah data pada tabel helm
                 $query1 = mysqli_query($mysqli, "UPDATE is_helm SET stock_akhir = '$total_stock'
-                                                              WHERE kode_mat    = '$kode_mat'")
+                                                              WHERE id_helm    = '$id_helm'")
                                                 or die('Ada kesalahan pada query update : '.mysqli_error($mysqli));
 
                 // cek query

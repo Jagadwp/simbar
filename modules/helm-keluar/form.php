@@ -115,13 +115,13 @@ if ($_GET['form']=='add') { ?>
               <div class="form-group">
                 <label class="col-sm-2 control-label">Material</label>
                 <div class="col-sm-5">
-                  <select class="chosen-select" name="kode_mat" data-placeholder="-- Pilih material dan lokasi gudang yang paling sesuai --" onchange="tampil_helm(this)" autocomplete="off" required>
+                  <select class="chosen-select" name="id_helm" data-placeholder="-- Pilih material dan lokasi gudang yang paling sesuai --" onchange="tampil_helm(this)" autocomplete="off" required>
                     <option value=""></option>
                     <?php
-                      $query_obat = mysqli_query($mysqli, "SELECT kode_mat,nama_mat,jenis,kaliber,negara,gudang FROM is_helm ORDER BY nama_mat ASC")
+                      $query_obat = mysqli_query($mysqli, "SELECT id_helm,kode_mat,nama_mat,jenis,kaliber,negara,gudang FROM is_helm ORDER BY nama_mat ASC")
                                                             or die('Ada kesalahan pada query tampil obat: '.mysqli_error($mysqli));
                       while ($data_obat = mysqli_fetch_assoc($query_obat)) {
-                        echo"<option value=\"$data_obat[kode_mat]\"> $data_obat[kode_mat] | $data_obat[nama_mat] | $data_obat[jenis] | $data_obat[kaliber] | $data_obat[negara] | $data_obat[gudang] </option>";
+                        echo"<option value=\"$data_obat[id_helm]\"> $data_obat[kode_mat] | $data_obat[nama_mat] | $data_obat[jenis] | $data_obat[kaliber] | $data_obat[negara] | $data_obat[gudang] </option>";
                       }
                     ?>
                   </select>

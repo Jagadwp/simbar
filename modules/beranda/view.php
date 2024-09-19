@@ -29,7 +29,7 @@
           <div class="inner">
             <?php  
             // fungsi query untuk menampilkan data dari tabel helm
-            $query = mysqli_query($mysqli, "SELECT COUNT(kode_mat) as jumlah FROM is_helm")
+            $query = mysqli_query($mysqli, "SELECT COUNT(id_helm) as jumlah FROM is_helm")
                                             or die('Ada kesalahan pada query tampil Data material: '.mysqli_error($mysqli));
 
             // tampilkan data
@@ -119,7 +119,7 @@
           <div class="inner">
             <?php  
             // fungsi query untuk menampilkan data dari tabel helm
-            $query = mysqli_query($mysqli, "SELECT COUNT(kode_mat) as jumlah FROM is_helm")
+            $query = mysqli_query($mysqli, "SELECT COUNT(id_helm) as jumlah FROM is_helm")
                                             or die('Ada kesalahan pada query tampil Data Helm: '.mysqli_error($mysqli));
 
             // tampilkan data

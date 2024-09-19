@@ -23,8 +23,8 @@ $tgl_akhir = $explode[2]."-".$explode[1]."-".$explode[0];
 if (isset($_GET['tgl_awal'])) {
     $no    = 1;
     // fungsi query untuk menampilkan data dari tabel Helm keluar
-    $query = mysqli_query($mysqli, "SELECT a.kode_transaksi,a.no_sput,a.satkai,a.tanggal_keluar,a.kode_mat,a.jumlah_keluar,b.kode_mat,b.nama_mat,b.jenis,b.kaliber,b.negara,b.stock_akhir,b.satuan,b.gudang
-                                    FROM is_obat_keluar as a INNER JOIN is_helm as b ON a.kode_mat=b.kode_mat
+    $query = mysqli_query($mysqli, "SELECT a.kode_transaksi,a.no_sput,a.satkai,a.tanggal_keluar,a.id_helm,a.jumlah_keluar,b.kode_mat,b.nama_mat,b.jenis,b.kaliber,b.negara,b.stock_akhir,b.satuan,b.gudang
+                                    FROM is_obat_keluar as a INNER JOIN is_helm as b ON a.id_helm=b.id_helm
                                     WHERE a.tanggal_keluar BETWEEN '$tgl_awal' AND '$tgl_akhir'
                                     ORDER BY a.kode_transaksi ASC") 
                                     or die('Ada kesalahan pada query tampil Transaksi : '.mysqli_error($mysqli));

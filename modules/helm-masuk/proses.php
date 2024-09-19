@@ -20,21 +20,21 @@ else {
             $sumber            = mysqli_real_escape_string($mysqli, trim($_POST['sumber']));
             $exp               = explode('-',$tanggal);
             $tanggal_masuk    = $exp[2]."-".$exp[1]."-".$exp[0];
-            $kode_mat          = mysqli_real_escape_string($mysqli, trim($_POST['kode_mat']));
+            $id_helm          = mysqli_real_escape_string($mysqli, trim($_POST['id_helm']));
             $jumlah_masuk     = mysqli_real_escape_string($mysqli, trim($_POST['jumlah_masuk']));
             $total_stock       = mysqli_real_escape_string($mysqli, trim($_POST['total_stock']));
             $created_user      = $_SESSION['id_user'];
 
             // perintah query untuk menyimpan data ke tabel helm masuk
-            $query = mysqli_query($mysqli, "INSERT INTO is_obat_masuk(kode_transaksi,no_spus,tanggal_masuk,sumber,kode_mat,jumlah_masuk,created_user) 
-                                            VALUES('$kode_transaksi','$no_sput','$tanggal_masuk','$sumber','$kode_mat','$jumlah_masuk','$created_user')")
+            $query = mysqli_query($mysqli, "INSERT INTO is_obat_masuk(kode_transaksi,no_spus,tanggal_masuk,sumber,id_helm,jumlah_masuk,created_user) 
+                                            VALUES('$kode_transaksi','$no_sput','$tanggal_masuk','$sumber','$id_helm','$jumlah_masuk','$created_user')")
                                             or die('Ada kesalahan pada query insert : '.mysqli_error($mysqli));    
 
             // cek query
             if ($query) {
                 // perintah query untuk mengubah data pada tabel helm
                 $query1 = mysqli_query($mysqli, "UPDATE is_helm SET stock_akhir = '$total_stock'
-                                                              WHERE kode_mat    = '$kode_mat'")
+                                                              WHERE id_helm    = '$id_helm'")
                                                 or die('Ada kesalahan pada query update : '.mysqli_error($mysqli));
 
                 // cek query

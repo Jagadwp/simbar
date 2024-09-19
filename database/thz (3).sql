@@ -28,6 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `is_helm` (
+  `id_helm` int NOT NULL AUTO_INCREMENT,
   `kode_mat` varchar(20) NOT NULL,
   `nama_mat` varchar(50) NOT NULL,
   `jenis` varchar(20) NOT NULL,
@@ -44,15 +45,18 @@ CREATE TABLE `is_helm` (
   `created_user` int(3) NOT NULL,
   `created_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_user` int(3) NOT NULL,
-  `updated_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `updated_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id_helm`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `is_helm`
 --
 
-INSERT INTO `is_helm` (`kode_mat`, `nama_mat`, `jenis`, `kaliber`, `no_lot`, `negara`, `siap`, `tidak_siap`, `stock_akhir`, `satuan`, `deret`, `gambar`, `gudang`, `created_user`, `created_date`, `updated_user`, `updated_date`) VALUES
-('AMO-1', 'Amunisi', 'API', '4,5 mm', '12345', 'Amerika', 11, 11, 22, 'Butir', '22', '', 'GD.03/T', 1, '2024-09-18 09:46:03', 1, '2024-09-18 09:46:03');
+INSERT INTO is_helm (kode_mat,nama_mat,jenis,kaliber,no_lot,negara,siap,tidak_siap,stock_akhir,satuan,deret,gambar,gudang,created_user,created_date,updated_user,updated_date) VALUES
+	 ('AMO-1','Amunisi','API','4,5 mm','12345','Amerika',11,11,22,'Butir','22','','GD.03/T',1,'2024-09-18 16:46:03',1,'2024-09-18 16:46:03'),
+	 ('AMO-2','Exploder','APIT','5,56x45 mm','88','Amerika',12,88,100,'Buah','88','','GD.06/G',1,'2024-09-19 19:33:56',1,'2024-09-19 19:33:56'),
+	 ('AMO-2','Sumbu Api dan Ledak','API','5,56x45 mm','22','Australia',22,2,222,'Buah','2222','','GD.10/G',1,'2024-09-19 19:58:30',1,'2024-09-19 19:58:30');
 
 -- --------------------------------------------------------
 
@@ -65,7 +69,7 @@ CREATE TABLE `is_obat_keluar` (
   `no_sput` varchar(20) NOT NULL,
   `tanggal_keluar` date NOT NULL,
   `satkai` varchar(50) NOT NULL,
-  `kode_mat` varchar(15) NOT NULL,
+  `id_helm` int NOT NULL,
   `jumlah_keluar` int(11) NOT NULL,
   `created_user` int(3) NOT NULL,
   `created_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -82,7 +86,7 @@ CREATE TABLE `is_obat_masuk` (
   `no_spus` varchar(20) NOT NULL,
   `tanggal_masuk` date NOT NULL,
   `sumber` varchar(50) NOT NULL,
-  `kode_mat` varchar(15) NOT NULL,
+  `id_helm` int NOT NULL,
   `jumlah_masuk` int(11) NOT NULL,
   `created_user` int(3) NOT NULL,
   `created_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
@@ -133,7 +137,7 @@ ALTER TABLE `is_helm`
 --
 ALTER TABLE `is_obat_keluar`
   ADD PRIMARY KEY (`kode_transaksi`),
-  ADD KEY `id_barang` (`kode_mat`),
+  ADD KEY `id_barang` (`id_helm`),
   ADD KEY `created_user` (`created_user`);
 
 --
@@ -141,7 +145,7 @@ ALTER TABLE `is_obat_keluar`
 --
 ALTER TABLE `is_obat_masuk`
   ADD PRIMARY KEY (`kode_transaksi`),
-  ADD KEY `id_barang` (`kode_mat`),
+  ADD KEY `id_barang` (`id_helm`),
   ADD KEY `created_user` (`created_user`);
 
 --
@@ -176,8 +180,15 @@ ALTER TABLE `is_helm`
 -- Constraints for table `is_obat_masuk`
 --
 ALTER TABLE `is_obat_masuk`
-  ADD CONSTRAINT `is_obat_masuk_ibfk_1` FOREIGN KEY (`kode_mat`) REFERENCES `is_helm` (`kode_mat`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `is_obat_masuk_ibfk_1` FOREIGN KEY (`id_helm`) REFERENCES `is_helm` (`id_helm`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `is_obat_masuk_ibfk_2` FOREIGN KEY (`created_user`) REFERENCES `is_users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `is_obat_keluar`
+--
+ALTER TABLE `is_obat_keluar`
+  ADD CONSTRAINT `is_obat_keluar_ibfk_1` FOREIGN KEY (`id_helm`) REFERENCES `is_helm` (`id_helm`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `is_obat_keluar_ibfk_2` FOREIGN KEY (`created_user`) REFERENCES `is_users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

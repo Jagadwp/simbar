@@ -44,8 +44,9 @@ else {
     
     elseif ($_GET['act']=='update') {
         if (isset($_POST['simpan'])) {
-            if (isset($_POST['kode_mat'])) {
+            if (isset($_POST['id_helm'])) {
                 // ambil data hasil submit dari form
+                $id_helm     = mysqli_real_escape_string($mysqli, trim($_POST['id_helm']));
                 $kode_mat     = mysqli_real_escape_string($mysqli, trim($_POST['kode_mat']));
                 $nama_mat     = mysqli_real_escape_string($mysqli, trim($_POST['nama_mat']));
                 $jenis        = mysqli_real_escape_string($mysqli, trim($_POST['jenis']));
@@ -75,7 +76,7 @@ else {
                                                                     gudang          = '$gudang',
                                                                     gambar          = '$gambar',
                                                                     updated_user    = '$updated_user'
-                                                              WHERE kode_mat        = '$kode_mat'")
+                                                              WHERE id_helm        = '$id_helm'")
                                                 or die('Ada kesalahan pada query update : '.mysqli_error($mysqli));
 
                 // cek query
@@ -89,10 +90,10 @@ else {
 
     elseif ($_GET['act']=='delete') {
         if (isset($_GET['id'])) {
-            $kode_mat = $_GET['id'];
+            $id_helm = $_GET['id'];
     
             // perintah query untuk menghapus data pada tabel material
-            $query = mysqli_query($mysqli, "DELETE FROM is_helm WHERE kode_mat='$kode_mat'")
+            $query = mysqli_query($mysqli, "DELETE FROM is_helm WHERE id_helm='$id_helm'")
                                             or die('Ada kesalahan pada query delete : '.mysqli_error($mysqli));
 
             // cek hasil query

@@ -81,7 +81,7 @@
             <?php  
             $no = 1;
             // fungsi query untuk menampilkan data dari tabel material
-            $query = mysqli_query($mysqli, "SELECT kode_mat,nama_mat,jenis,kaliber,no_lot,negara,tidak_siap,siap,stock_akhir,satuan,deret,gudang,gambar FROM is_helm ORDER BY kode_mat DESC")
+            $query = mysqli_query($mysqli, "SELECT id_helm,kode_mat,nama_mat,jenis,kaliber,no_lot,negara,tidak_siap,siap,stock_akhir,satuan,deret,gudang,gambar FROM is_helm ORDER BY id_helm DESC")
                                             or die('Ada kesalahan pada query tampil Data material: '.mysqli_error($mysqli));
 
             // tampilkan data
@@ -112,11 +112,11 @@
                       <td width='80'class='lect'>$data[gudang]</td>
                       <td class='center' width='80'>
                         <div>
-                          <a data-toggle='tooltip' data-placement='top' title='Ubah' style='margin-right:5px' class='btn btn-primary btn-sm' href='?module=form_helm&form=edit&id=$data[kode_mat]'>
+                          <a data-toggle='tooltip' data-placement='top' title='Ubah' style='margin-right:5px' class='btn btn-primary btn-sm' href='?module=form_helm&form=edit&id=$data[id_helm]'>
                               <i style='color:#fff' class='glyphicon glyphicon-edit'></i>
                           </a>";
             ?>
-                          <a data-toggle="tooltip" data-placement="top" title="Hapus" class="btn btn-danger btn-sm" href="modules/helm/proses.php?act=delete&id=<?php echo $data['kode_mat'];?>" onclick="return confirm('Anda yakin ingin menghapus data material <?php echo $data['nama_mat']; ?> ?');">
+                          <a data-toggle="tooltip" data-placement="top" title="Hapus" class="btn btn-danger btn-sm" href="modules/helm/proses.php?act=delete&id=<?php echo $data['id_helm'];?>" onclick="return confirm('Anda yakin ingin menghapus data material <?php echo $data['nama_mat']; ?> ?');">
                               <i style="color:#fff" class="glyphicon glyphicon-trash"></i>
                           </a>
             <?php

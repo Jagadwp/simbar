@@ -5,10 +5,10 @@ session_start();
 require_once "../../config/database.php";
 
 if(isset($_POST['dataidobat'])) {
-	$kode_mat = $_POST['dataidobat'];
+	$id_helm = $_POST['dataidobat'];
 
   // fungsi query untuk menampilkan data dari tabel helm
-  $query = mysqli_query($mysqli, "SELECT kode_mat,nama_mat,satuan,stock_akhir FROM is_helm WHERE kode_mat='$kode_mat'")
+  $query = mysqli_query($mysqli, "SELECT kode_mat,nama_mat,satuan,stock_akhir FROM is_helm WHERE id_helm='$id_helm'")
                                   or die('Ada kesalahan pada query tampil data material: '.mysqli_error($mysqli));
 
   // tampilkan data

@@ -59,8 +59,8 @@
             <?php  
             $no = 1;
             // fungsi query untuk menampilkan data dari tabel helm
-            $query = mysqli_query($mysqli, "SELECT a.kode_transaksi,a.no_sput,a.satkai,a.tanggal_keluar,a.kode_mat,a.jumlah_keluar,b.kode_mat,b.nama_mat,b.jenis,b.kaliber,b.negara,b.satuan,b.gudang
-                                            FROM is_obat_keluar as a INNER JOIN is_helm as b ON a.kode_mat=b.kode_mat ORDER BY kode_transaksi DESC")
+            $query = mysqli_query($mysqli, "SELECT a.kode_transaksi,a.no_sput,a.satkai,a.tanggal_keluar,a.id_helm,a.jumlah_keluar,b.kode_mat,b.nama_mat,b.jenis,b.kaliber,b.negara,b.satuan,b.gudang
+                                            FROM is_obat_keluar as a INNER JOIN is_helm as b ON a.id_helm=b.id_helm ORDER BY kode_transaksi DESC")
                                             or die('Ada kesalahan pada query tampil Data Obat Keluar: '.mysqli_error($mysqli));
 
             // tampilkan data
