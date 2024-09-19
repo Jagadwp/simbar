@@ -189,6 +189,21 @@ ALTER TABLE `is_obat_masuk`
 ALTER TABLE `is_obat_keluar`
   ADD CONSTRAINT `is_obat_keluar_ibfk_1` FOREIGN KEY (`id_helm`) REFERENCES `is_helm` (`id_helm`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `is_obat_keluar_ibfk_2` FOREIGN KEY (`created_user`) REFERENCES `is_users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- Insert data dummy `is_obat_masuk`
+INSERT INTO is_obat_masuk (kode_transaksi,no_spus,tanggal_masuk,sumber,id_helm,jumlah_masuk,created_user,created_date) VALUES
+	 ('PMB/HAR-2024-00001','oke/1','0000-00-00','sip/2',3,3,1,'2024-09-19 20:44:39'),
+	 ('PMB/HAR-2024-00002','oke/2','0000-00-00','sip/2',3,5,1,'2024-09-19 20:49:44'),
+	 ('PMB/HAR-2024-00003','oke/3','0000-00-00','sip/3',1,4,1,'2024-09-19 20:50:13'),
+	 ('PMB/HAR-2024-00004','oke/5','0000-00-00','sip/5',3,1,1,'2024-09-19 21:02:35'),
+	 ('PMB/HAR-2024-00005','oke/6','0000-00-00','sip/6',3,2,1,'2024-09-19 21:10:19'),
+	 ('PMB/HAR-2024-00006','oke/7','2024-09-19','sip/7',3,31,1,'2024-09-19 21:38:47');
+
+-- Insert data dummy `is_obat_keluar`
+INSERT INTO is_obat_keluar (kode_transaksi,no_sput,tanggal_keluar,satkai,id_helm,jumlah_keluar,created_user,created_date) VALUES
+	 ('PUT/HAR-2024-00001','yes/1','2024-09-19','kuy/1',3,2,1,'2024-09-19 21:02:15'),
+	 ('PUT/HAR-2024-00002','yes/2','2024-09-19','kuy/2',3,4,1,'2024-09-19 21:03:02');
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
