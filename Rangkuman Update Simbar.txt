@@ -1,0 +1,21 @@
+Rangkuman Update 1:
+1. Menambahkan 'id_helm' di tabel is_helm sebagai Primary Key.
+2. Menghapus 'kode_mat' di tabel is_obat_masuk.
+3. Menambahkan 'id_helm' di tabel is_obat_masuk & is_obat_keluar sebagai Foreign Key. Merujuk pada 'id_helm' pada is_helm.
+4. Mengupdate semua penggunaan 'kode_mat' dalam query where dan select join.
+
+Alasan perubahan:
+Kolom 'kode_mat' pada table is_helm tidaklah unik. Namun, kolom ini sering dipakai dalam menentukan record pada operasi update dan delete. Sehingga saat men-update/delete 1 record. Record lain dengan 'kode_mat' yang sama ikut berubah.
+
+Berhubung 'kode_mat' pada table is_helm tidak unik. Maka kolom 'kode_mat' pada table is_obat_masuk dapat merujuk ke banyak data sekaligus. Hal ini membuat kerancuan saat melakukan select query dengan join on is_helm.kode_mat = is_obat_masuk/keluar.kode_mat.
+
+Agar integritas dan konsistensi data terjaga, maka dibuat kolom baru 'id_helm' seperti yang dijelaskan di atas. 
+
+Kolom 'id_helm' ini merupakan primary key yang unik (unique) yang selanjutnya akan digunakan untuk menentukan record mana yg akan diupdate/delete. Sekaligus saat select query yang menghubungkan data is_helm dengan table is_obat_masuk atau is_obat_keluar (join on is_helm.id_helm = is_obat_masuk/keluar.id_helm)
+
+
+Rangkuman Update 2:
+- Typo input date -> name="tanggal_keluar" pada modules\helm-masuk\form.php. Seharusnya name="tanggal_masuk". Sebelumnya tanggal material masuk "00-00-0000" semua.
+
+Rangkuman Update 3:
+- Tambah validasi data duplikat saat add & update helm. Data dianggap duplikat/sudah masuk jika ada record is_helm  WHERE kode_mat = '$kode_mat' AND no_lot = '$no_lot' AND deret = '$deret' AND gudang = '$gudang'" .
